@@ -1,25 +1,66 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h5>Nama: </h5>
-<b>{{nama}}</b>
+<style>
+   h3{
+    padding-left: 5%;
+    padding-top: 20px;
+   }
 
-<table>
-    <tr>
-    <th>Nama Barang</th>
-    <th>Harga Barang</th>
-    <th>Deskripsi</th>
-    </tr>
-    {% comment %} Tambahkan data di bawah baris ini {% endcomment %}
-    {% for barang in list_barang %}
+   table{
+    margin-left: 20px;
+   }
+
+   h5{
+    font-size: 10px;
+    font-family: monospace; 
+    padding-top: 10px;
+    padding-left: 30px;
+   }
+
+</style>
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  </head>
+  <body style="background-color: whitesmoke;">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+<header>
+    <nav class="navbar navbar-light" style="background-color: skyblue;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" style="text-decoration-color: white">List of Content</a>
+            <button class="btn btn-light me-2" type="button" style="background-color: whitesmoke; text-decoration: none; text-decoration-color: whitesmoke;"><a href="{% url 'wishlist:logout' %}">Logout</a></button>
+        </div>
+    </nav>
+</header>
+
+<div class="body-content">
+    <h3 id="welcome">Welcome, {{nama}}</h3>
+
+    <table class="table-info table table-hover">
         <tr>
-            <th>{{barang.nama_barang}}</th>
-            <th>{{barang.harga_barang}}</th>
-            <th>{{barang.deskripsi}}</th>
+        <th>Nama Barang</th>
+        <th>Harga Barang</th>
+        <th>Deskripsi</th>
         </tr>
-    {% endfor %}
-</table>
-<h5>Sesi terakhir login: {{ last_login }}</h5>
-<button><a href="{% url 'wishlist:logout' %}">Logout</a></button>
+        {% comment %} Tambahkan data di bawah baris ini {% endcomment %}
+        {% for barang in list_barang %}
+            <tr>
+                <th>{{barang.nama_barang}}</th>
+                <th>{{barang.harga_barang}}</th>
+                <th>{{barang.deskripsi}}</th>
+            </tr>
+        {% endfor %}
+    </table>
+    <h5>Sesi terakhir login: {{ last_login }}</h5>
+</div>
 
 {% endblock content %}
