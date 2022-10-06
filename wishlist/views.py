@@ -24,6 +24,26 @@ def show_wishlist(request):
     }
     return render(request, "wishlist.html", context)
     
+    
+@login_required(login_url='/wishlist/login/')
+def wishlist_ajax(req):
+    context = {
+        'nama': 'safa',
+        'last_login': req.COOKIES['last_login'],
+    }
+    return render(req, "wishlist_ajax.html", context)
+
+@login_required(login_url='/wishlist/login/')
+def add_wishlist(req):
+    if req.method == "POST":
+        nama = req.POST.get("nama")
+        harga = req.POST.get("harga")
+        deskripsi = req.POST.get("deskripsi")
+        BarangWishlist.objects.create(nama_barang=nama, harga_barang=harga, deskripsi=deskripsi)
+        return HttpResponse()
+    else:
+        print("here")
+        return redirect("wishlist:show_wishlist")
 
 def show_xml(request):
     data = BarangWishlist.objects.all()
